@@ -28,8 +28,8 @@ function shakeChange(n){
 
 function Start(){
 	Screen.showCursor = false;
-	cameras[cameras.length-1].GetComponent("Camera").active = false;
-	cameras[camId].GetComponent("Camera").active = true;
+	cameras[cameras.length-1].GetComponent("Camera").enabled = false;
+	cameras[camId].GetComponent("Camera").enabled = true;
 }
 
 function Update(){	
@@ -70,9 +70,9 @@ function keyEvent(e:Event){
 }
 
 function changeCamera(n){
-	cameras[camId].GetComponent("Camera").active = false;
+	cameras[camId].GetComponent("Camera").enabled = false;
 	camId = Mathf.Clamp(camId+n,0,cameras.length -1);
-	cameras[camId].GetComponent("Camera").active = true;
+	cameras[camId].GetComponent("Camera").enabled = true;
 	
 }
 
