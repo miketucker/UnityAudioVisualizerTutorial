@@ -1,9 +1,10 @@
-var minNum:Number = 0.1;
-var colorMultiplier:Number = 0.1;
-var scaleMultiplier:Number = 0.1;
-var origScale : Number = 0.1;
-var playMode : int = 0;
-var oscId : int = 0;
+public var minNum:Number = 0.1;
+public var colorMultiplier:Number = 0.1;
+public var scaleMultiplier:Number = 0.1;
+public var origScale : Number = 0.1;
+public var playMode : int = 0;
+public var oscId : int = 0;
+public var pullAmount : Number = 0.5;
 private var matAr:Array = [Color(0.5,1.0,0.5,1.0),Color(1.0,0.0,.5,1.0),Color(0.0,1.0,0.5,1.0),Color(1.0,0.0,1.0,1.0)];
 
 private var origPos:Vector3 = new Vector3();
@@ -57,7 +58,7 @@ function Update () {
 }
 
 function pull(){
-	rigid.velocity += (Vector3.zero - transform.position) * OSCReceiver.messages[oscId] * .1;	
+	rigid.velocity += (Vector3.zero - transform.position) * OSCReceiver.messages[oscId] * pullAmount;	
 }
 
 function blink(){

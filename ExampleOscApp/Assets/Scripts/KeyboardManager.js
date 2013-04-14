@@ -1,5 +1,8 @@
+public var strobeThreshold:Number = 1.0;
+public var shakeThreshold:Number = 0.2;
+
 var cameras:Camera[];
-private var threshold:Number = 0.2;
+
 private var camId:int = 0;
 private var shakeIntensity:Number = 0.0;
 private var lastStrobe:Number = 0.0;
@@ -10,9 +13,9 @@ function OnGUI() {
     }
 }
 
-function strobe(){
+function Strobe(){
 	var v = OSCReceiver.messages[0];
-	if(v < OSCReceiver.messages[4]) v = 0;
+	if(v < strobeThreshold) v = 0;
 	else v *= 3;
 	cameras[camId].GetComponent("Camera").backgroundColor = Color(v,v,v);
 }
@@ -33,15 +36,13 @@ function Start(){
 }
 
 function Update(){	
-	if(OSCReceiver && OSCReceiver.messages[0] > threshold){
-		shake();
-	}		
-	strobe();
+	Shake();
+	Strobe();
 
 }
 
-function shake(){
-	if(Random.value > .5){
+function Shake(){
+	if(OSCReceiver && OSCReceiver.messages[0] > shakeThreshold && Random.value > .5){
 		cameras[camId].transform.position += Vector3(Random.value-.5,Random.value-.5,Random.value-.5) * shakeIntensity * OSCReceiver.messages[0];
 	}
 
